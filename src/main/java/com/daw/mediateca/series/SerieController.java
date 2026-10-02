@@ -1,6 +1,7 @@
 package com.daw.mediateca.series;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,5 +18,13 @@ public class SerieController {
     @GetMapping // GET /series
     public List<Serie> listar() {
         return series;
+    }
+
+    @GetMapping("/{id}") // GET /series/1
+    public Serie buscarPorId(@PathVariable Long id) {
+        return series.stream()
+                .filter(s -> s.id().equals(id))
+                .findFirst()
+                .orElse(null);
     }
 }
