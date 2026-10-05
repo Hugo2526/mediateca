@@ -24,4 +24,13 @@ public class PeliculaController {
                 .findFirst()
                 .orElse(null); // Si no existe, respuesta vacía (lo mejoraremos en la UD3)
     }
+
+
+    @GetMapping("/director/{director}") // GET /peliculas/director/Bong Joon-ho
+    public List<Pelicula> buscarPorDirector(@PathVariable String director) {
+        return peliculas.stream()
+                .filter(p -> p.director().equalsIgnoreCase(director))
+                .toList();
+    }
+
 }
